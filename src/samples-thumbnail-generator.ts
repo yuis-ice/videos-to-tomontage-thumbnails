@@ -12,6 +12,11 @@ async function generateThumbnail(videoPath: string): Promise<void> {
     const name = path.basename(videoPath, path.extname(videoPath));
     const outputPath = path.join(dir, `${name}_summary.jpg`);
     
+    if (fs.existsSync(outputPath)) {
+        console.log(`Skipping (thumbnail exists): ${videoPath}`);
+        return;
+    }
+    
     const command = `ffmpeg -i "${videoPath}" -vf "select='lte(t,750)*not(mod(t,30))',scale=320:-1,tile=5x5" -frames:v 1 "${outputPath}"`;
     
     try {
