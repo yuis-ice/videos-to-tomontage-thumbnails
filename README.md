@@ -126,8 +126,7 @@ If you prefer not to use the install script:
 git clone https://github.com/yuis-ice/videos-to-tomontage-thumbnails.git
 cd videos-to-tomontage-thumbnails
 npm install
-npx tsc src/samples-thumbnail-generator.ts --target es2020 --module commonjs --outDir dist --lib es2020 --moduleResolution node
-node dist/samples-thumbnail-generator.js --help
+npx tsx src/samples-thumbnail-generator.ts --help
 ```
 
 ## Contributing

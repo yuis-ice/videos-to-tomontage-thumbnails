@@ -44,25 +44,23 @@ echo -e "${BLUE}📥 Downloading from GitHub...${NC}"
 git clone --depth 1 "https://github.com/$REPO.git" .
 
 echo -e "${BLUE}📦 Installing dependencies...${NC}"
-npm install --production
-
-echo -e "${BLUE}🔨 Building TypeScript...${NC}"
-npx tsc src/samples-thumbnail-generator.ts --target es2020 --module commonjs --outDir dist --lib es2020 --moduleResolution node
+npm install
 
 echo -e "${BLUE}📋 Creating executable script...${NC}"
 cat > "$INSTALL_DIR/$TOOL_NAME" << 'EOF'
 #!/bin/bash
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-node "$SCRIPT_DIR/samples-thumbnail-generator-dist/samples-thumbnail-generator.js" "$@"
+npx tsx "$SCRIPT_DIR/samples-thumbnail-generator-files/src/samples-thumbnail-generator.ts" "$@"
 EOF
 
 chmod +x "$INSTALL_DIR/$TOOL_NAME"
 
 # Copy files to install directory
-TOOL_DIR="$INSTALL_DIR/samples-thumbnail-generator-dist"
+TOOL_DIR="$INSTALL_DIR/samples-thumbnail-generator-files"
 mkdir -p "$TOOL_DIR"
-cp dist/samples-thumbnail-generator.js "$TOOL_DIR/"
+cp -r src "$TOOL_DIR/"
 cp -r node_modules "$TOOL_DIR/"
+cp package.json "$TOOL_DIR/" 2>/dev/null || echo '{"dependencies":{"tsx":"*","chalk":"*","commander":"*"}}' > "$TOOL_DIR/package.json"
 
 echo -e "${GREEN}✅ Installation completed!${NC}"
 echo
