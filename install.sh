@@ -50,7 +50,8 @@ echo -e "${BLUE}📋 Creating executable script...${NC}"
 cat > "$INSTALL_DIR/$TOOL_NAME" << 'EOF'
 #!/bin/bash
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-npx tsx "$SCRIPT_DIR/samples-thumbnail-generator-files/src/samples-thumbnail-generator.ts" "$@"
+cd "$SCRIPT_DIR/samples-thumbnail-generator-files"
+npx tsx src/samples-thumbnail-generator.ts "$@"
 EOF
 
 chmod +x "$INSTALL_DIR/$TOOL_NAME"
