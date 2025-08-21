@@ -21,7 +21,7 @@ A command-line tool that automatically generates thumbnail montages from video f
 ## Quick Install
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/yuis-ice/videos-to-tomontage-thumbnails/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/yuis-ice/videos-to-tomontage-thumbnails/master/install.sh | bash
 ```
 
 This will:
