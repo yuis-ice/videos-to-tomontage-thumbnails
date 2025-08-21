@@ -31,6 +31,15 @@ check_dependency "npm"
 check_dependency "ffmpeg"
 check_dependency "git"
 
+# Check Node.js version
+NODE_VERSION=$(node -v | sed 's/v//')
+NODE_MAJOR=$(echo $NODE_VERSION | cut -d. -f1)
+if [ "$NODE_MAJOR" -lt 14 ]; then
+    echo -e "${RED}❌ Error: Node.js 14+ required, found v$NODE_VERSION${NC}"
+    echo -e "${YELLOW}Please upgrade Node.js: https://nodejs.org${NC}"
+    exit 1
+fi
+
 # Create install directory
 mkdir -p "$INSTALL_DIR"
 
